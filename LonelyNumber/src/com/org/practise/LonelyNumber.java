@@ -1,6 +1,5 @@
 package com.org.practise;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 

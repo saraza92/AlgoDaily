@@ -22,9 +22,8 @@ public class LonelyNumber {
 			i++;
 		}
 
-		
-		return (int)map.keySet().toArray()[0];
-		
-		
+		for(int a:map.keySet())
+			return a;
+		return 0;
 	}
 }

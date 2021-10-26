@@ -23,7 +23,7 @@ public class LonelyNumber {
 		}
 
 		
-		return (int)map.keySet().toArray()[0];
+		return map.keySet().toArray()[0];
 		
 		
 	}

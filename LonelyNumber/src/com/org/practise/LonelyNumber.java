@@ -1,5 +1,6 @@
 package com.org.practise;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,9 @@ public class LonelyNumber {
 
 	public static int lonelyNumber(int[] arr) {
 
+		//return Arrays.stream(arr).reduce((x, y)->x^y).getAsInt();
+		
+		
 		Map<Integer, Integer> map = new HashMap<>();
 		int i = 0;
 		while (i < arr.length) {

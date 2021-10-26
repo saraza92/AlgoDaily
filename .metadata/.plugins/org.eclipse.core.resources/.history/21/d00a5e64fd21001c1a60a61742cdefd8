@@ -1,0 +1,10 @@
+
+public class StringReversal {
+
+	public static void main(String args[]) {
+		String a = "I am a bad boy djd hbhgfj lfjhfjhv";
+		a=ReverseString(a);
+		System.out.println(a);
+	}
+		
+}

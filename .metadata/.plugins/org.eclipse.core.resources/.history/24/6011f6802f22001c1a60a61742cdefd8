@@ -1,0 +1,11 @@
+public class ArrayIntersection {
+
+	public static void main ( String args[]) {
+
+		String[] first = {"red","green","blue"};
+		String[] second = {"green","blue","black"};
+		String[] answer = arrayIntersection(first,second);
+	}
+	
+	
+}

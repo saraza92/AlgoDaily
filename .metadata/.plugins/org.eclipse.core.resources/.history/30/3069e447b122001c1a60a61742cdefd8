@@ -1,0 +1,27 @@
+package anagram;
+
+import java.util.HashMap;
+
+public class anagram {
+
+	public static void main ( String args [] ) {
+		String a = "anwar";
+		String b = "rawna";
+		System.out.println(isAnagram(a,b));
+		
+	}
+	
+	static boolean isAnagram(String a, String b) {
+		
+		HashMap<Character,Integer> hashMap = new HashMap<>();
+		for (char c : a.toCharArray())
+			if(hashMap.containsKey(c)) {
+				hashMap.put(c, hashMap.get(c)+1);
+			}
+			else
+				hashMap.put(c, 1);
+			
+		
+		return true;
+	}
+}

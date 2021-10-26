@@ -1,0 +1,19 @@
+package anagram;
+
+public class anagram {
+
+	public static void main ( String args [] ) {
+		String a = "anwar";
+		String b = "rawna";
+		System.out.println(isAnagram(a,b));
+		
+	}
+	
+	static boolean isAnagram(String a, String b) {
+		
+		HashMap<char,int> hashMap = new HashMap<>();
+		
+		
+		return true;
+	}
+}

@@ -1,0 +1,23 @@
+package org.HashMap;
+
+public class HashMapImplementation {
+	public static void main ( String args[] ) {
+		
+		
+		
+	}
+	
+	public class HashMap {
+		public class Entry {
+			int key;
+			Object value;
+			
+			public Entry(int key, Object value) {
+				this.key = key;
+				this.value=value;
+			}
+			
+			
+		}
+	}
+}

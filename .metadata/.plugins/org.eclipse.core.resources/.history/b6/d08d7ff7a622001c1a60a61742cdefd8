@@ -1,0 +1,28 @@
+import java.util.*;
+
+public class ArrayIntersection {
+
+	public static void main ( String args[]) {
+
+		String[] first = {"red","green","blue"};
+		String[] second = {"green","blue","black"};
+		Set<String> answer = arrayIntersection(first,second);
+		for ( String a : answer)
+			System.out.println(a);
+	}
+	
+	public static Set<String> arrayIntersection(String[] first, String[] second) {
+		
+		Set<String> answer = new HashSet<String>();
+		for (int i=0;i<first.length;i++) {
+			for ( int j=0; j<second.length; j++) {
+				if ( first[i].equals(second[j])) {
+					answer.add(first[i]);
+				}
+			}
+		}
+		return answer;
+	}
+	
+	
+}

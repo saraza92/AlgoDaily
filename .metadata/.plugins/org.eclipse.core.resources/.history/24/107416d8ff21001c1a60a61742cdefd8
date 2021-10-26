@@ -1,0 +1,18 @@
+
+public class StringReversal {
+
+	public static void main(String args[]) {
+		String a = "njnschnjkdasn j32 uida";
+		a = ReverseString(a);
+		System.out.println(a);
+	}
+
+	static String ReverseString(String str) {
+		int i=0,j=str.length()-1;
+		char temp;
+		while(i<j) {
+			temp=str.charAt(j);
+			str[j]=str.charAt(i);
+		}
+	}
+}

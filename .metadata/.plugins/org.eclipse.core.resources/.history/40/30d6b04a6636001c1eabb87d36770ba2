@@ -1,0 +1,14 @@
+package com.org.practise;
+
+public class LonelyNumber {
+	public static void main (String [] args) {
+		
+		int a = lonelyNumber(new int[] {1,2,3,4,3,2,1});
+		System.out.println(a);
+	}
+	
+	
+	public static int lonelyNumber(int[] arr) {
+		return 0;
+	}
+}

@@ -6,61 +6,96 @@ import java.util.List;
 
 public class GraphImplementation {
 
+	static class Edge {
+		Object dest;
+		int weight;
+
+		public Object getDest() {
+			return dest;
+		}
+
+		public void setDest(Object dest) {
+			this.dest = dest;
+		}
+
+		public int getWeight() {
+			return weight;
+		}
+
+		public void setWeight(int weight) {
+			this.weight = weight;
+		}
+
+		public Edge(Object dest, int weight) {
+			super();
+			this.dest = dest;
+			this.weight = weight;
+		}
+
+	}
+
 	static class Graph {
-		HashMap<Object, ArrayList<Object>> adjacencyList;
+		HashMap<Object, ArrayList<Edge>> adjacencyList;
 
 		public Graph() {
-			this.adjacencyList = new HashMap<Object, ArrayList<Object>>();
+			this.adjacencyList = new HashMap<Object, ArrayList<Edge>>();
 		}
 
 		public void addVertex(Object nodeVal) {
 			this.adjacencyList.put(nodeVal, null);
 		}
 
-		public void addEdge(Object src, Object dest) {
-			ArrayList<Object> neighbours;
+		public void addEdge(Object src, Edge edge) {
+			ArrayList<Edge> neighbours;
+			Object dest = edge.getDest();
 
 			if (this.adjacencyList.containsKey(src)) {
 				if (this.adjacencyList.get(src) == null) {
-					neighbours = new ArrayList<Object>();
-					neighbours.add(dest);
+					neighbours = new ArrayList<Edge>();
+					neighbours.add(edge);
 					this.adjacencyList.put(src, neighbours);
 				} else
-					this.adjacencyList.get(src).add(dest);
+					this.adjacencyList.get(src).add(edge);
 			}
 			if (this.adjacencyList.containsKey(dest)) {
 				if (this.adjacencyList.get(dest) == null) {
-					neighbours = new ArrayList<Object>();
-					neighbours.add(src);
+					neighbours = new ArrayList<Edge>();
+					neighbours.add(new Edge(src, edge.getWeight()));
 					this.adjacencyList.put(dest, neighbours);
 				} else
-					this.adjacencyList.get(dest).add(src);
+					this.adjacencyList.get(dest).add(new Edge(src, edge.getWeight()));
 			}
 
 		}
 
 		public void removeVertex(Object val) {
-			ArrayList<Object> vertexNeighbours = this.adjacencyList.get(val);
-			ArrayList<Object> neighbours;
-			for (Object vertex : vertexNeighbours) {
-				neighbours = this.adjacencyList.get(vertex);
-				neighbours.remove(val);
-				this.adjacencyList.replace(vertex, neighbours);
+			ArrayList<Edge> vertexNeighbours = this.adjacencyList.get(val);
+			ArrayList<Edge> neighbours;
+			for (Edge edge : vertexNeighbours) {
+				neighbours = this.adjacencyList.get(edge.getDest());
+				for (Edge e : neighbours) {
+					if (e.getDest().equals(val)) {
+						neighbours.remove(e);
+						break;
+					}
+				}
+				this.adjacencyList.replace(edge.getDest(), neighbours);
 			}
 			this.adjacencyList.remove(val);
 		}
 
-		public void removeEdge(Object src, Object dest) {
-			ArrayList<Object> neighbours;
+		public void removeEdge(Object src, Edge edge) {
+			ArrayList<Edge> neighbours;
+			Object dest = edge.getDest();
 			neighbours = this.adjacencyList.get(src);
-			neighbours.remove(dest);
+			neighbours.remove(edge);
 			if (neighbours.isEmpty())
 				this.adjacencyList.replace(src, null);
 			else
 				this.adjacencyList.replace(src, neighbours);
 
 			neighbours = this.adjacencyList.get(dest);
-			neighbours.remove(src);
+			neighbours.remove(new Edge(src, edge.getWeight()));
 			if (neighbours.isEmpty())
 				this.adjacencyList.replace(dest, null);
 			else
@@ -73,12 +108,11 @@ public class GraphImplementation {
 			StringBuffer buffer = new StringBuffer();
 
 			for (Object vertex : this.adjacencyList.keySet()) {
-				buffer.append(vertex.toString());
+				buffer.append('\n' + vertex.toString());
 				buffer.append(':');
 
-				for (Object neighbor : this.adjacencyList.get(vertex)) {
-					buffer.append(' ');
-					buffer.append(neighbor.toString());
+				for (Edge edge : this.adjacencyList.get(vertex)) {
+					buffer.append(' ' + edge.getDest().toString() + " weight: " + edge.getWeight() + ", ");
 				}
 
 				result.add(buffer.toString());
@@ -87,28 +121,6 @@ public class GraphImplementation {
 
 			return result;
 		}
-	}
-
-	// remove or comment if running tests (we run our own main)
-	public static void main(String[] args) {
-		Graph graph = new Graph();
-		char[] vertices = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
-		for (int i = 0; i < vertices.length; i++) {
-			graph.addVertex(vertices[i]);
-		}
-		graph.addEdge('A', 'G');
-		graph.addEdge('A', 'E');
-		graph.addEdge('A', 'C');
-		graph.addEdge('B', 'C');
-		graph.addEdge('C', 'D');
-		graph.addEdge('D', 'E');
-		graph.addEdge('E', 'F');
-		graph.addEdge('E', 'C');
-		graph.addEdge('G', 'D');
-		graph.removeVertex('A');
-
-		System.out.println(graph.printNeighbors());
 
 	}
-
 }
